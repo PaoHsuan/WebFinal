@@ -7,24 +7,24 @@ $(document).ready(function(){
     ctx = $("#myCanvas")[0].getContext("2d");
 
     imgMain = new Image();
-    imgMain.src = "images/spriteSheet.png";
+    imgMain.src = "RPG/images/innnn.png";
     currentImgMainX = 0;
     currentImgMainY = 0;
     imgMain.onload = function(){
-        ctx.drawImage(imgMain, 0, 0, 80, 130, currentImgMainX, currentImgMainY, 200, 200);
+        ctx.drawImage(imgMain,0, 0, 120, 150, currentImgMainX, currentImgMainY, 200, 200);
     };
 
     imgMountain = new Image();
-    imgMountain.src = "images/material.png";
+    imgMountain.src = "RPG/images/material.png";
     imgEnemy = new Image();
-    imgEnemy.src = "images/Enemy.png";
+    imgEnemy.src = "RPG/images/lii.png";
     imgMountain.onload = function(){
         imgEnemy.onload = function(){
             for(let x in mapArray){
                 if(mapArray[x]==1){
-                    ctx.drawImage(imgMountain, 32, 65, 32, 32, x%3*200, Math.floor(x/3)*200, 200, 200);
+                    ctx.drawImage(imgMountain, 257, 190, 32, 32, x%3*200, Math.floor(x/3)*200, 200, 200);
                 }else if(mapArray[x]==3){
-                    ctx.drawImage(imgEnemy, 7, 40, 104, 135, x%3*200, Math.floor(x/3)*200, 200, 200);
+                    ctx.drawImage(imgEnemy, 110, 50, 204, 235, x%3*200, Math.floor(x/3)*200, 200, 200);
                 }
             }
         }
@@ -34,21 +34,21 @@ $(document).ready(function(){
 $(document).keydown(function(event){
     let targetImgMainX, targetImgMainY, targetBlock, cutImagePositionX;
     event.preventDefault();
-    switch(event.code){
+    switch(event.originalEvent.code){
         case "ArrowLeft":
             targetImgMainX = currentImgMainX-200;
             targetImgMainY = currentImgMainY;
-            cutImagePositionX = 175;
+            cutImagePositionX = 0;
             break;
         case "ArrowUp":
             targetImgMainX = currentImgMainX;
             targetImgMainY = currentImgMainY-200;
-            cutImagePositionX = 355;
+            cutImagePositionX = 0;
             break;
         case "ArrowRight":
             targetImgMainX = currentImgMainX+200;
             targetImgMainY = currentImgMainY;
-            cutImagePositionX = 540;
+            cutImagePositionX = 0;
             break;
         case "ArrowDown":
             targetImgMainX = currentImgMainX;
@@ -74,16 +74,16 @@ $(document).keydown(function(event){
     ctx.drawImage(imgMain, cutImagePositionX, 0, 80, 130, currentImgMainX, currentImgMainY, 200, 200);
     switch(mapArray[targetBlock]){
         case undefined:
-            $("#talkBox").text("邊界");
+            $("#talkBox").text("啊碰壁了");
             break;
         case 1:
-            $("#talkBox").text("有山");
+            $("#talkBox").text("男主角在哪呢");
             break;
         case 2:
-            $("#talkBox").text("抵達終點");
+            $("#talkBox").text("啊是死路");
             break;
         case 3:
-            $("#talkBox").text("哈摟");
+            $("#talkBox").text("抓到你了！");
             break;
     }
 });
